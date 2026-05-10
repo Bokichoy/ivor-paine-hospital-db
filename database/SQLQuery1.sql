@@ -200,147 +200,147 @@ INSERT INTO MEDICAL_HISTORY (PatientNo, StaffNo, ComplaintCode, DateStarted, Tre
 (22, 3,  'O004', '2025-03-16', 'T304', NULL),
 (30, 10, 'K004', '2025-04-01', 'T504', NULL);
 
--- 1
-SELECT 
-    c.Name AS ConsultantName, 
-    c.Specialty,
-    d.Name AS TeamDoctorName, 
-    d.Position AS TeamDoctorPosition
-FROM DOCTOR c
-JOIN DOCTOR d ON c.StaffNo = d.ConsultantID
-WHERE c.Position = 'Consultant'
-ORDER BY c.Name, d.Name;
+-- -- 1
+-- SELECT 
+--     c.Name AS ConsultantName, 
+--     c.Specialty,
+--     d.Name AS TeamDoctorName, 
+--     d.Position AS TeamDoctorPosition
+-- FROM DOCTOR c
+-- JOIN DOCTOR d ON c.StaffNo = d.ConsultantID
+-- WHERE c.Position = 'Consultant'
+-- ORDER BY c.Name, d.Name;
 
--- 2
-SELECT 
-    w.WardName, 
-    cu.UnitNumber AS CareUnit, 
-    n.NurseName AS InchargeNurse, 
-    n.Role AS NurseRole
-FROM WARD w
-JOIN CARE_UNIT cu ON w.WardName = cu.WardName
-JOIN NURSE n ON cu.InchargeNurseID = n.NurseID
-ORDER BY w.WardName, cu.UnitNumber;
+-- -- 2
+-- SELECT 
+--     w.WardName, 
+--     cu.UnitNumber AS CareUnit, 
+--     n.NurseName AS InchargeNurse, 
+--     n.Role AS NurseRole
+-- FROM WARD w
+-- JOIN CARE_UNIT cu ON w.WardName = cu.WardName
+-- JOIN NURSE n ON cu.InchargeNurseID = n.NurseID
+-- ORDER BY w.WardName, cu.UnitNumber;
 
--- 3
-SELECT 
-    p.PatientName, 
-    mh.ComplaintCode, 
-    mh.TreatmentCode, 
-    mh.DateStarted, 
-    mh.DateEnded
-FROM PATIENT p
-JOIN MEDICAL_HISTORY mh ON p.PatientNo = mh.PatientNo
-ORDER BY p.PatientName, mh.DateStarted;
+-- -- 3
+-- SELECT 
+--     p.PatientName, 
+--     mh.ComplaintCode, 
+--     mh.TreatmentCode, 
+--     mh.DateStarted, 
+--     mh.DateEnded
+-- FROM PATIENT p
+-- JOIN MEDICAL_HISTORY mh ON p.PatientNo = mh.PatientNo
+-- ORDER BY p.PatientName, mh.DateStarted;
 
--- 4
-SELECT 
-    d.Name AS DoctorName, 
-    p.PatientName, 
-    n.NurseName AS StaffNurse
-FROM DOCTOR d
-JOIN PATIENT p ON d.StaffNo = p.PrimaryDoctorID
-JOIN CARE_UNIT cu ON p.UnitNumber = cu.UnitNumber AND p.WardName = cu.WardName
-JOIN NURSE n ON cu.InchargeNurseID = n.NurseID
-WHERE d.Position = 'Junior Houseman'
-ORDER BY d.Name, p.PatientName;
+-- -- 4
+-- SELECT 
+--     d.Name AS DoctorName, 
+--     p.PatientName, 
+--     n.NurseName AS StaffNurse
+-- FROM DOCTOR d
+-- JOIN PATIENT p ON d.StaffNo = p.PrimaryDoctorID
+-- JOIN CARE_UNIT cu ON p.UnitNumber = cu.UnitNumber AND p.WardName = cu.WardName
+-- JOIN NURSE n ON cu.InchargeNurseID = n.NurseID
+-- WHERE d.Position = 'Junior Houseman'
+-- ORDER BY d.Name, p.PatientName;
 
--- 5
-SELECT 
-    Name AS ConsultantName, 
-    Specialty
-FROM DOCTOR
-WHERE Position = 'Consultant' AND Specialty IN (
-    SELECT Specialty
-    FROM DOCTOR
-    WHERE Position = 'Consultant'
-    GROUP BY Specialty
-    HAVING COUNT(*) = 1
-);
+-- -- 5
+-- SELECT 
+--     Name AS ConsultantName, 
+--     Specialty
+-- FROM DOCTOR
+-- WHERE Position = 'Consultant' AND Specialty IN (
+--     SELECT Specialty
+--     FROM DOCTOR
+--     WHERE Position = 'Consultant'
+--     GROUP BY Specialty
+--     HAVING COUNT(*) = 1
+-- );
 
--- 6
-SELECT 
-    mh.ComplaintCode, 
-    mh.TreatmentCode, 
-    d.Name AS DoctorName, 
-    d.Position, 
-    d.Specialty
-FROM MEDICAL_HISTORY mh
-JOIN DOCTOR d ON mh.StaffNo = d.StaffNo
-ORDER BY mh.ComplaintCode, mh.TreatmentCode;
+-- -- 6
+-- SELECT 
+--     mh.ComplaintCode, 
+--     mh.TreatmentCode, 
+--     d.Name AS DoctorName, 
+--     d.Position, 
+--     d.Specialty
+-- FROM MEDICAL_HISTORY mh
+-- JOIN DOCTOR d ON mh.StaffNo = d.StaffNo
+-- ORDER BY mh.ComplaintCode, mh.TreatmentCode;
 
--- 7
-SELECT 
-    p.PatientName, 
-    mh.ComplaintCode, 
-    mh.TreatmentCode
-FROM PATIENT p
-JOIN MEDICAL_HISTORY mh ON p.PatientNo = mh.PatientNo
-WHERE p.PatientNo IN (
-    SELECT PatientNo
-    FROM MEDICAL_HISTORY
-    GROUP BY PatientNo
-    HAVING COUNT(DISTINCT ComplaintCode) > 1
-)
-ORDER BY p.PatientName, mh.ComplaintCode;
+-- -- 7
+-- SELECT 
+--     p.PatientName, 
+--     mh.ComplaintCode, 
+--     mh.TreatmentCode
+-- FROM PATIENT p
+-- JOIN MEDICAL_HISTORY mh ON p.PatientNo = mh.PatientNo
+-- WHERE p.PatientNo IN (
+--     SELECT PatientNo
+--     FROM MEDICAL_HISTORY
+--     GROUP BY PatientNo
+--     HAVING COUNT(DISTINCT ComplaintCode) > 1
+-- )
+-- ORDER BY p.PatientName, mh.ComplaintCode;
 
--- 8
-SELECT 
-    mh.ComplaintCode, 
-    mh.TreatmentCode, 
-    p.PatientName
-FROM MEDICAL_HISTORY mh
-JOIN PATIENT p ON mh.PatientNo = p.PatientNo
-ORDER BY mh.ComplaintCode, mh.TreatmentCode, p.PatientName;
+-- -- 8
+-- SELECT 
+--     mh.ComplaintCode, 
+--     mh.TreatmentCode, 
+--     p.PatientName
+-- FROM MEDICAL_HISTORY mh
+-- JOIN PATIENT p ON mh.PatientNo = p.PatientNo
+-- ORDER BY mh.ComplaintCode, mh.TreatmentCode, p.PatientName;
 
--- 9
-SELECT 
-    StaffNo,
-    Name AS DoctorName, 
-    Position,
-    Specialty
-FROM DOCTOR 
-WHERE StaffNo = 6; 
+-- -- 9
+-- SELECT 
+--     StaffNo,
+--     Name AS DoctorName, 
+--     Position,
+--     Specialty
+-- FROM DOCTOR 
+-- WHERE StaffNo = 6; 
 
--- 10
-SELECT 
-    p.PatientName, 
-    p.DOB, 
-    p.DateAdmitted, 
-    w.WardName, 
-    cu.UnitNumber, 
-    d.Name AS PrimaryDoctor, 
-    mh.ComplaintCode, 
-    mh.DateStarted, 
-    mh.TreatmentCode, 
-    mh.DateEnded
-FROM PATIENT p
-JOIN WARD w ON p.WardName = w.WardName
-JOIN CARE_UNIT cu ON p.UnitNumber = cu.UnitNumber AND p.WardName = cu.WardName
-JOIN DOCTOR d ON p.PrimaryDoctorID = d.StaffNo
-LEFT JOIN MEDICAL_HISTORY mh ON p.PatientNo = mh.PatientNo
-WHERE p.PatientNo = 1; 
+-- -- 10
+-- SELECT 
+--     p.PatientName, 
+--     p.DOB, 
+--     p.DateAdmitted, 
+--     w.WardName, 
+--     cu.UnitNumber, 
+--     d.Name AS PrimaryDoctor, 
+--     mh.ComplaintCode, 
+--     mh.DateStarted, 
+--     mh.TreatmentCode, 
+--     mh.DateEnded
+-- FROM PATIENT p
+-- JOIN WARD w ON p.WardName = w.WardName
+-- JOIN CARE_UNIT cu ON p.UnitNumber = cu.UnitNumber AND p.WardName = cu.WardName
+-- JOIN DOCTOR d ON p.PrimaryDoctorID = d.StaffNo
+-- LEFT JOIN MEDICAL_HISTORY mh ON p.PatientNo = mh.PatientNo
+-- WHERE p.PatientNo = 1; 
 
--- 11
-SELECT 
-    TreatmentCode, 
-    DateStarted, 
-    DateEnded,
-    ComplaintCode
-FROM MEDICAL_HISTORY
-WHERE ComplaintCode = 'C001' 
-  AND DateStarted >= '2025-01-01' 
-  AND DateStarted <= '2025-12-31'
-ORDER BY TreatmentCode;
+-- -- 11
+-- SELECT 
+--     TreatmentCode, 
+--     DateStarted, 
+--     DateEnded,
+--     ComplaintCode
+-- FROM MEDICAL_HISTORY
+-- WHERE ComplaintCode = 'C001' 
+--   AND DateStarted >= '2025-01-01' 
+--   AND DateStarted <= '2025-12-31'
+-- ORDER BY TreatmentCode;
 
--- 12
-SELECT 
-    PositionOrRole, 
-    COUNT(*) AS StaffCount
-FROM (
-    SELECT Position AS PositionOrRole FROM DOCTOR
-    UNION ALL
-    SELECT Role AS PositionOrRole FROM NURSE
-) AS AllStaff
-GROUP BY PositionOrRole
-ORDER BY StaffCount DESC;
+-- -- 12
+-- SELECT 
+--     PositionOrRole, 
+--     COUNT(*) AS StaffCount
+-- FROM (
+--     SELECT Position AS PositionOrRole FROM DOCTOR
+--     UNION ALL
+--     SELECT Role AS PositionOrRole FROM NURSE
+-- ) AS AllStaff
+-- GROUP BY PositionOrRole
+-- ORDER BY StaffCount DESC;

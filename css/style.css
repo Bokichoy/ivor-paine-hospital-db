@@ -1,0 +1,78 @@
+a {
+    text-decoration: none;
+    color: green;
+}
+
+header h1 {
+    margin: 15px;
+    color: #90aead;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: center;
+}
+
+header img {
+    height: 50px;
+    margin-left: 15px;
+}
+
+header nav {
+    width: 100%; 
+    padding: 20px;
+    background-color: #244855;
+}
+
+header nav a {
+    color: #90aead;
+    margin: 0 23px;
+    font-size: 20px;
+}
+
+header nav a:hover {
+    color: white;
+    font-size: 20px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+}
+
+h2 {
+    color: #90aead;
+    margin: 10px 15px;
+}
+
+.para {
+    margin-left: 23px;
+    line-height: 1.6;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #244855;
+    min-height: 50px;
+    color: #fff;
+    margin-top: 30px;
+}
+
+form {
+    margin-left: 23px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+input[type="text"], select {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 5px 15px;
+    cursor: pointer;
+}

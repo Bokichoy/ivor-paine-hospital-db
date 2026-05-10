@@ -12,7 +12,6 @@ function getDbConnection() {
     }
 }
 
-// Function to prevent XSS attacks when printing database variables to HTML
 function e($value) {
     return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
 }

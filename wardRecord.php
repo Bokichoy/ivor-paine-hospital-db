@@ -25,7 +25,7 @@ require_once 'includes/header.php';
         <?php endforeach; ?>
     </select>
     <button type="submit">Filter</button>
-    <a href="ward_record.php" style="margin-left: 10px;">Clear</a>
+    <a href="wardRecord.php" style="margin-left: 10px;">Clear</a>
 </form>
 
 <?php

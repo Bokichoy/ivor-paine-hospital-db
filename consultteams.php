@@ -26,7 +26,6 @@ if (!empty($staffNo)):
     if (!$consultant): ?>
         <p class="para">No consultant found with Staff No: <?php echo e($staffNo); ?>. Please ensure the ID belongs to a Consultant.</p>
     <?php else: 
-        // Get Team Info
         $teamSql = "SELECT StaffNo, Name, Position, Specialty FROM DOCTOR WHERE ConsultantID = :staff_no";
         $tStmt = $pdo->prepare($teamSql);
         $tStmt->execute([':staff_no' => $staffNo]);

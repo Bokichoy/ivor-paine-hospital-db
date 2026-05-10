@@ -69,12 +69,10 @@ if ($reportType == 'q1') {
     $sql = "SELECT PositionOrRole AS 'Position / Role', COUNT(*) AS 'Total Staff' FROM (SELECT Position AS PositionOrRole FROM DOCTOR UNION ALL SELECT Role AS PositionOrRole FROM NURSE) AS AllStaff GROUP BY PositionOrRole ORDER BY 'Total Staff' DESC";
 }
 
-// 2. Only run the rendering logic once at the bottom
 if ($sql !== "") {
     echo "<h3 class='para'>" . e($reportTitle) . "</h3>";
     $stmt = $pdo->query($sql);
     
-    // Fetch as an associative array so we can grab the column names dynamically
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (empty($results)) {
@@ -82,7 +80,6 @@ if ($sql !== "") {
     } else {
         echo "<table><thead><tr>";
         
-        // Grab the keys (column names) from the very first row and use them as <th>
         $firstRow = $results[0];
         foreach (array_keys($firstRow) as $header) {
             echo "<th>" . e($header) . "</th>";
@@ -90,7 +87,6 @@ if ($sql !== "") {
         
         echo "</tr></thead><tbody>";
 
-        // Loop through all the rows and their respective columns to generate the <td>
         foreach ($results as $row) {
             echo "<tr>";
             foreach ($row as $value) {

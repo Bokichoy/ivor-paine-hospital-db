@@ -22,6 +22,9 @@
             <a href="consultteams.php">Teams</a>
             <a href="reports.php">Reports</a>
             <a href="treatmentSearch.php">Treatment Search</a>
+            <a href="add_patient.php" style="color: #48bb78; font-weight: bold;">+ Patient</a>
+            <a href="add_doctor.php" style="color: #48bb78; font-weight: bold;">+ Doctor</a>
+            <a href="add_medical_history.php" style="color: #48bb78; font-weight: bold;">+ Complaint</a>
         </nav>
     </header>
     

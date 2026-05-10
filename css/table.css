@@ -1,28 +1,45 @@
+/* css/table.css */
+
 table {
-    width: 95%;
+    width: calc(100% - 46px); /* Keeps it aligned with your .para margins */
+    margin: 20px 23px;
     border-collapse: collapse;
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: hidden; /* Keeps the rounded corners even with background colors */
 }
 
 th, td {
-    border: 2px solid #ddd;
-    padding: 10px;
+    border-bottom: 1px solid #e2e8f0; /* Only horizontal borders for a cleaner look */
+    padding: 12px 15px;
     text-align: left;
+    color: #2d3748;
 }
 
 th {
-    background-color: #90aead;
+    background-color: #2b6cb0; /* Solid blue header */
     color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-bottom: none;
 }
 
+/* Zebra striping for readability */
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f7fafc;
 }
 
+/* Hover effect on rows so you don't lose your place reading across */
 tr:hover {
-    background-color: #dfe6e9;
+    background-color: #edf2f7;
+    transition: background-color 0.2s ease;
+}
+
+/* Make action links inside the table bold */
+td a {
+    font-weight: 600;
 }
